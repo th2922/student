@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose"; // Corrected the package name from "mangoose" to "mongoose"
 import blogRoute from "./routes/blog_route.js";
+import userRoute from "./routes/user_route.js";
 
 const app = express();
 const port = 5000 || process.env.PORT ; // Ensure the fallback value is 5000
@@ -14,6 +15,11 @@ app.get('/api', (req, res) => {
 
 
  app.use("/blog", blogRoute);
+ app.use("/user",userRoute);
+ app.post('/test', (req, res) => {
+  res.status(200).json({ message: 'Test route working' });
+});
+
 
 // Connect to MongoDB
 mongoose.connect(

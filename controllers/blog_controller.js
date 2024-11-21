@@ -15,7 +15,7 @@ export const addblog =async( req ,res, next )=>{
     const blog = new blog_model({ titel,descreption,image,dateANdTime});
     
      try{
-         blog.save();
+        await blog.save();
      }catch(err){
         console.log(`---------------------> ${err}`);
      }
