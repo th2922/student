@@ -1,14 +1,14 @@
-import user_model from "../modules/user_model.js";
+import teacher_model from "../modules/teacher_model.js";
 import bcrypt from 'bcryptjs';  // You can install bcryptjs using npm install bcryptjs
 
 
 export const getalluser= async (req,res,next )=>{
-    const  alluser =await user_model.find();
+    const  alluser =await teacher_model.find();
     res.status(200).json({alluser});
 }
 
 // User Signup Function
-export const usersignup = async (req, res, next) => {
+export const teachersignup = async (req, res, next) => {
     const { name, email, password } = req.body;
 
     // Simple validation: Check if fields are present
@@ -18,26 +18,26 @@ export const usersignup = async (req, res, next) => {
 
     try {
         // Check if user already exists
-        const existingUser = await user_model.findOne({ email });
-        if (existingUser) {
-            return res.status(400).json({ message: "User with this email already exists" });
+        const existingTeacher = await teacher_model.findOne({ email });
+        if (existingTeacher) {
+            return res.status(400).json({ message: " Teacher with this email already exists" });
         }
 
         // Hash the password before saving
         const hashedPassword = await bcrypt.hash(password, 10);  // Salt rounds are set to 10
 
         // Create a new user with the hashed password
-        const user = new user_model({
+        const teacher = new teacher_model({
             name,
             email,
             password: hashedPassword,
         });
 
         // Save the user to the database
-        await user.save();
+        await teacher.save();
 
         // Send a successful response
-        return res.status(201).json({ message: "User signup successful" });
+        return res.status(201).json({ message: "Teacher signup successful" });
     } catch (err) {
         // Log the error and send a generic error message
         console.error("Error during signup:", err);
@@ -51,8 +51,8 @@ export const logine = async (req, res, next) => {
 
     try {
         // Check if user exists
-        const exesUser = await user_model.findOne({ email });
-        if (!exesUser) {
+        const exesTeacher = await teacher_model.findOne({ email });
+        if (!exesTeacher) {
             return res.status(400).json({ message: "You have no account yet, please sign up." });
         }
 

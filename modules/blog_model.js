@@ -2,7 +2,7 @@
 import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
-const blogSchema= new Schema({
+const notesSchema= new Schema({
     titel:{
         type:String,
         required: true,
@@ -11,14 +11,7 @@ const blogSchema= new Schema({
         type: String,
         required:true,
     },
-    image:{
-        type:String,
-        required:true,
-    },
-    dateANdTime:{
-        type:String,
-        required:true,
-    },
+    
 }) 
 
-export default mongoose.model("Blog",blogSchema);
+export default mongoose.model("Notes",notesSchema);
